@@ -151,6 +151,8 @@ const countNumberOfChildren = (arr) => {
   return numTotalChildren;
 };
 
+// attribute 'key' in Object snippet to Stack Overflow. https://stackoverflow.com/questions/455338/how-do-i-check-if-an-object-has-a-key-in-javascript
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
@@ -160,7 +162,7 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 ------------------------------------------------------------------------------------------------ */
 
 const calculateAverage = (arr) => {
-    
+
 };
 
 /* ------------------------------------------------------------------------------------------------
