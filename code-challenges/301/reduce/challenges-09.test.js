@@ -9,7 +9,10 @@ Note: You may not use the array's built-in length property.
 ------------------------------------------------------------------------------------------------ */
 
 const countNumberOfElements = (arr) => {
-  // Solution code here...
+  let numElements = arr.reduce((accum) => {
+    return accum += 1;
+  });
+  return numElements;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -66,10 +69,15 @@ let starWarsData = [{
   eye_color: 'brown',
   birth_year: '19BBY',
   gender: 'female'
-}]
+}];
 
 const returnNames = (arr) => {
-  // Solution code here...
+  let names = [];
+  let charNames = arr.reduce(function(accum, character, idx){
+    names.push(character.name);
+    return character.name;
+  },arr[0]);
+  return names;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -81,7 +89,7 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 ------------------------------------------------------------------------------------------------ */
 
 const reversedString = (arr) => {
-  // Solution code here...
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -134,7 +142,13 @@ const characters = [
 ];
 
 const countNumberOfChildren = (arr) => {
-  // Solution code here...
+  let numTotalChildren = arr.reduce((accumulator, person) => {
+    if('children' in person){
+      accumulator = accumulator + person.children.length;
+    }
+    return accumulator;
+  }, 0);
+  return numTotalChildren;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -146,7 +160,7 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 ------------------------------------------------------------------------------------------------ */
 
 const calculateAverage = (arr) => {
-  // Solution code here...
+    
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -168,7 +182,7 @@ const isPrime = (value) => {
 
 const countPrimeNumbers = (arr) => {
   // Solution code here...
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
@@ -243,7 +257,7 @@ describe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return an array continaing the names of the characters', () => {
     expect(returnNames(starWarsData)).toStrictEqual([ 'Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa' ]);
     expect(returnNames(starWarsData).length).toStrictEqual(5);
@@ -256,7 +270,7 @@ xdescribe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return the total number of children', () => {
     expect(countNumberOfChildren(characters)).toStrictEqual(14);
   });
