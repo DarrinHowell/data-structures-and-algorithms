@@ -95,7 +95,7 @@ The top row of the board is considered row zero and row numbers increase as they
 ------------------------------------------------------------------------------------------------ */
 
 const battleship = (board, row, col) => {
-  return board[row][col] === '#' ? true : false;
+  return board[row][col] === '#' ? 'hit' : 'miss';
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -107,7 +107,13 @@ For example, the following input returns a product of 720: [[1,2], [3,4], [5,6]]
 ------------------------------------------------------------------------------------------------ */
 
 const calculateProduct = (numbers) => {
-  // Solution code here...
+  let overallProduct = 1;
+  numbers.forEach( arr => {
+    arr.forEach( num => {
+      overallProduct *= num;
+    });
+  });
+  return overallProduct;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -127,7 +133,15 @@ const weeklyTemperatures = [
 ];
 
 const averageDailyTemperature = (weather) => {
-  // Solution code here...
+  let totalCount = 0;
+  let numWeekDays = 7;
+  for(let i = 0; i < weather.length; i++){
+    for(let j = 0; j < weather[i].length; j++){
+      totalCount += weather[i][j];
+    }
+  }
+  let overallAvg = totalCount / (weather.length * numWeekDays);
+  return overallAvg;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -148,7 +162,20 @@ let lowestWeeklyTemperatureData = [
 ];
 
 const lowestWeeklyAverage = (weather) => {
-  // Solution code here...
+  const avgArrCollection = [];
+  let numDays = 7;
+  for(let i = 0; i < weather.length; i++){
+    let weeksCount = 0;
+    for(let j = 0; j < weather[i].length; j++){
+      weeksCount += weather[i][j];
+    }
+    let weeksAvg = weeksCount / numDays;
+    avgArrCollection.push(weeksAvg);
+  }
+  avgArrCollection.sort( (a,b) => {
+    return a-b;
+  });
+  return avgArrCollection[0];
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -213,7 +240,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   const battleshipData = [
     ['#', ' ', '#', ' '],
     ['#', ' ', '#', ' '],
@@ -232,7 +259,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should multiply all the numbers together', () => {
     expect(calculateProduct([[1,2], [3,4], [5,6]])).toStrictEqual(720);
   });
@@ -245,13 +272,13 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should calculate and return the average temperature of the data set', () => {
     expect(averageDailyTemperature(weeklyTemperatures)).toStrictEqual(60.25);
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return the lowest weekly average temperature within the data set', () => {
     expect(lowestWeeklyAverage(weeklyTemperatures)).toStrictEqual(57);
     expect(lowestWeeklyAverage(lowestWeeklyTemperatureData)).toStrictEqual(46);
