@@ -9,7 +9,19 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 ------------------------------------------------------------------------------------------------ */
 
 const toTitleCase = (arr) => {
-  // Solution code here...
+  let titleCaseArr = [];
+  for(let i = 0; i < arr.length; i++){
+    let titleCaseStr = '';
+    for(let j = 0; j < arr[i].length; j++){
+      let letter = arr[i][j];
+      if(j === 0){
+        letter = letter.toUpperCase();
+      }
+      titleCaseStr += letter;
+    }
+    titleCaseArr.push(titleCaseStr);
+  }
+  return titleCaseArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -81,11 +93,27 @@ let starWarsData = [{
   eye_color: 'none',
   birth_year: '27BBY',
   gender: 'n/a'
-}]
+}];
 
 let biggerThanLuke = (arr) => {
-  // Solution code here...
-}
+  let biggerThanArr = [];
+  let biggerCastMembers = '';
+
+  if(arr.length){
+    let lukesWeight = parseInt(arr[0].mass);
+
+    for(let i = 0; i < arr.length; i++){
+      let charMass = parseInt(arr[i].mass);
+      if(charMass > lukesWeight){
+        biggerThanArr.push(arr[i].name);
+      }
+    }
+    biggerCastMembers += biggerThanArr.join(' - ');
+  }
+
+  return biggerCastMembers;
+
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -102,8 +130,23 @@ This data could be could be sorted by name or price.
 ------------------------------------------------------------------------------------------------ */
 
 const sortBy = (property, arr) => {
-  // Solution code here...
+  arr.sort( function(a,b) {
+    let itemA = a.property;
+    let itemB = b.property;
+    if(itemA < itemB){
+      return 1;
+    }
+    if(itemB < itemA){
+      return -1;
+    }
+
+    return 0;
+  });
+  return arr;
 };
+
+// attribution: MDN array.prototype.sort() https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+// demonstrated how to sort by property.
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -119,12 +162,12 @@ https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
 const isSecure = (url) => {
 // Solution code here...
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5 - Stretch Goal
 
-Write a function named detectTicTacToeWin that accepts a two-dimensional array of strings. Each string is guaranteed to be either "X", "O" or an empty string. Your function should check to see if any row, column, or either diagonal direction has three matching "X" or "O" symbols (non-empty strings), three-in-a-line. 
+Write a function named detectTicTacToeWin that accepts a two-dimensional array of strings. Each string is guaranteed to be either "X", "O" or an empty string. Your function should check to see if any row, column, or either diagonal direction has three matching "X" or "O" symbols (non-empty strings), three-in-a-line.
 
 This function should return either true or false to indicate if someone won the game.
 
@@ -142,7 +185,7 @@ Here is a sample board:
 
 const detectTicTacToeWin = (board) => {
   // Solution code here...
-}
+};
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -164,14 +207,14 @@ describe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return only characters that are bigger than Luke', () => {
     expect(biggerThanLuke(starWarsData)).toStrictEqual('Darth Vader - Pex Kylar');
     expect(biggerThanLuke([])).toStrictEqual('');
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should sort items by a price', () => {
 
     expect(sortBy('price', [
@@ -203,9 +246,9 @@ xdescribe('Testing challenge 3', () => {
 xdescribe('Testing challenge 4', () => {
   test('It should check if url is https', () => {
 
-    expect(isSecure('http://www.insecure.com')).toBe(false); 
-    expect(isSecure('https://secure.com')).toBe(true); 
-    expect(isSecure('https:/missingslash.org')).toBe(false); 
+    expect(isSecure('http://www.insecure.com')).toBe(false);
+    expect(isSecure('https://secure.com')).toBe(true);
+    expect(isSecure('https:/missingslash.org')).toBe(false);
   });
 });
 
